@@ -11,9 +11,21 @@ class CostCenterFactory extends Factory
 
     public function definition()
     {
+        $description = [
+            'Recursos Humanos',
+            'Financeiro',
+            'Compras',
+            'Vendas',
+            'Marketing',
+            'TI',
+            'Logística',
+            'Produção',
+            'Qualidade',
+            'Manutenção'
+        ];
         return [
             'code' => fake()->unique()->numerify('CC###'),
-            'description' => fake()->unique()->words(3, true)
+            'description' => fake()->unique()->randomElement($description)
         ];
     }
 }

@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="card">
-    <h2>Atribuições de Equipamentos</h2>
+    <h2 class="h2 text-center">Atribuições de Equipamentos</h2>
     
     <form action="{{ route('assignments.store') }}" method="POST" class="mt-4">
         @csrf
@@ -18,34 +18,39 @@
                 @endforeach
             </select>
         </div>
-
+    
         <div class="form-group">
-            <label for="equipment_id">Equipamento</label>
-            <select name="equipment_id" id="equipment_id" class="form-control" required>
-                <option value="">Selecione o equipamento...</option>
-                @foreach($availableEquipment as $equipment)
-                    <option value="{{ $equipment->id }}">
-                        {{ $equipment->model }} - Patrimônio: {{ $equipment->patrimony }}
-                    </option>
+            <label for="equipment_type">Tipo de Equipamento</label>
+            <select name="equipment_type" id="equipment_type" class="form-control" required>
+                <option value="">Selecione o tipo...</option>
+                @foreach($equipmentTypes as $type)
+                    <option value="{{ $type }}">{{ $type }}</option>
                 @endforeach
             </select>
         </div>
-
+    
+        <div class="form-group">
+            <label for="equipment_id">Equipamento</label>
+            <select name="equipment_id" id="equipment_id" class="form-control" required>
+                <option value="">Selecione o tipo primeiro...</option>
+            </select>
+        </div>
+    
         <div class="form-group">
             <label for="assignment_date">Data de Atribuição</label>
             <input type="date" name="assignment_date" id="assignment_date" 
                    class="form-control" required value="{{ date('Y-m-d') }}">
         </div>
-
+    
         <button type="submit" class="btn btn-primary">Registrar Atribuição</button>
     </form>
-
     <div class="mt-4">
         <h3>Atribuições Ativas</h3>
         <table class="table">
             <thead>
                 <tr>
                     <th>Funcionário</th>
+                    <th>Centro de Custo</th>
                     <th>Equipamento</th>
                     <th>Data de Atribuição</th>
                     <th>Ações</th>
@@ -54,17 +59,15 @@
             <tbody>
                 @foreach($activeAssignments as $assignment)
                     <tr>
+                        <td>{{ $assignment->employee->name }}</td>
+                        <td>{{ $assignment->employee->costCenter->code }}</td>
                         <td>
-                            {{ $assignment->employee->name }}
-                            <br>
+                            <div>
+                                <strong>{{ $assignment->equipment->gadgetModel->brand }} 
+                                        {{ $assignment->equipment->gadgetModel->model }}</strong>
+                            </div>
                             <small class="text-muted">
-                                {{ $assignment->employee->costCenter->code }}
-                            </small>
-                        </td>
-                        <td>
-                            {{ $assignment->equipment->model }}
-                            <br>
-                            <small class="text-muted">
+                                Tipo: {{ $assignment->equipment->gadgetModel->type }}<br>
                                 Patrimônio: {{ $assignment->equipment->patrimony }}
                             </small>
                         </td>
@@ -100,7 +103,16 @@
                 @foreach($assignmentHistory as $assignment)
                     <tr>
                         <td>{{ $assignment->employee->name }}</td>
-                        <td>{{ $assignment->equipment->model }}</td>
+                        <td>
+                            <div>
+                                <strong>{{ $assignment->equipment->gadgetModel->brand }} 
+                                        {{ $assignment->equipment->gadgetModel->model }}</strong>
+                            </div>
+                            <small class="text-muted">
+                                Tipo: {{ $assignment->equipment->gadgetModel->type }}<br>
+                                Patrimônio: {{ $assignment->equipment->patrimony }}
+                            </small>
+                        </td>
                         <td>{{ $assignment->assignment_date->format('d/m/Y') }}</td>
                         <td>{{ $assignment->return_date ? $assignment->return_date->format('d/m/Y') : '-' }}</td>
                     </tr>
@@ -109,4 +121,30 @@
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typeSelect = document.getElementById('equipment_type');
+        const equipmentSelect = document.getElementById('equipment_id');
+        const availableEquipment = @json($availableEquipment);
+    
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            equipmentSelect.innerHTML = '<option value="">Selecione o equipamento...</option>';
+    
+            if(selectedType) {
+                const filteredEquipment = availableEquipment.filter(
+                    eq => eq.gadget_model.type === selectedType
+                );
+    
+                filteredEquipment.forEach(eq => {
+                    const option = document.createElement('option');
+                    option.value = eq.id;
+                    option.textContent = `${eq.gadget_model.brand} ${eq.gadget_model.model} - Patrimônio: ${eq.patrimony}`;
+                    equipmentSelect.appendChild(option);
+                });
+            }
+        });
+    });
+    </script>
 @endsection

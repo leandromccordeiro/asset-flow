@@ -10,8 +10,8 @@
                 <i class="fas fa-users"></i>
             </div>
             <div class="card-content">
-                <h3>Funcionários</h3>
-                <p class="number">{{ $totalEmployees }}</p>
+                <h3 class="text-center">Funcionários</h3>
+                <p class="number text-center">{{ $totalEmployees }}</p>
             </div>
         </div>
 
@@ -20,9 +20,9 @@
                 <i class="fas fa-laptop"></i>
             </div>
             <div class="card-content">
-                <h3 class="">Equipamentos</h3>
-                <p class="number">{{ $totalEquipment }}</p>
-                <p class="sub-info ">{{ $availableEquipment }} disponíveis</p>
+                <h3 class="text-center">Equipamentos</h3>
+                <p class="number text-center">{{ $totalEquipment }}</p>
+                <p class="sub-info text-center text-danger">{{ $availableEquipment }} disponíveis</p>
             </div>
         </div>
 
@@ -30,9 +30,9 @@
             <div class="card-icon assignments">
                 <i class="fas fa-exchange-alt"></i>
             </div>
-            <div class="card-content">
-                <h3>Atribuições Ativas</h3>
-                <p class="number">{{ $activeAssignments }}</p>
+            <div class="card-content text-center">
+                <h3 class="text-center">Atribuições Ativas</h3>
+                <p class="number text-center">{{ $activeAssignments }}</p>
             </div>
         </div>
     </div>

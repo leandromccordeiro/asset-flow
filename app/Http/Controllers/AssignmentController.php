@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Employee;
 use App\Models\Equipment;
+use App\Models\GadgetModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,19 +14,25 @@ class AssignmentController extends Controller
     public function index()
     {
         $employees = Employee::with('costCenter')->get();
-        $availableEquipment = Equipment::where('is_available', true)->get();
-        $activeAssignments = Assignment::with(['employee.costCenter', 'equipment'])
-            ->whereNull('return_date')
-            ->get();
-        $assignmentHistory = Assignment::with(['employee', 'equipment'])
-            ->whereNotNull('return_date')
-            ->latest('return_date')
-            ->take(10)
-            ->get();
-
+        $availableEquipment = Equipment::with('gadgetModel')
+                                ->where('is_available', true)
+                                ->get();
+        $equipmentTypes = GadgetModel::select('type')
+                                ->distinct()
+                                ->pluck('type');
+        $activeAssignments = Assignment::with(['employee.costCenter', 'equipment.gadgetModel'])
+                                ->whereNull('return_date')
+                                ->get();
+        $assignmentHistory = Assignment::with(['employee', 'equipment.gadgetModel'])
+                                ->whereNotNull('return_date')
+                                ->latest()
+                                ->take(10)
+                                ->get();
+    
         return view('assignments.index', compact(
             'employees',
             'availableEquipment',
+            'equipmentTypes',
             'activeAssignments',
             'assignmentHistory'
         ));
@@ -35,7 +42,7 @@ class AssignmentController extends Controller
     {
         $validated = $request->validate([
             'employee_id' => 'required|exists:employees,id',
-            'equipment_id' => 'required|exists:equipment,id',
+            'equipment_id' => 'required|exists:equipments,id',
             'assignment_date' => 'required|date'
         ]);
 
