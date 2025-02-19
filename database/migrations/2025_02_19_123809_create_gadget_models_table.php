@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('gadget_models', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('equipments')->constrained()->onDelete('restrict');
-            $table->foreignId('gadget_models')->constrained()->onDelete('restrict');
-            $table->date('assignment_date');
-            $table->date('return_date')->nullable();
+            $table->string('type');
+            $table->string('brand');
+            $table->string('model');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('gadget_models');
     }
 };

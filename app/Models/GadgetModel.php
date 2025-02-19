@@ -11,7 +11,7 @@ class GadgetModel extends Model
     
     protected $fillable = ['type', 'brand', 'model'];
 
-    public function assignments()
+    public function equuipment()
     {
         return $this->hasMany(Equipment::class);
     }
