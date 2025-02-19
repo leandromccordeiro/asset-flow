@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained()->onDelete('restrict');
-            $table->foreignId('equipment_id')->constrained()->onDelete('restrict');
-            $table->date('assignment_date');
-            $table->date('return_date')->nullable();
+            $table->foreignId('gadget_models')->constrained()->onDelete('restrict');
+            $table->string('patrimony')->unique();
+            $table->date('purchase_date');
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('equipments');
     }
 };

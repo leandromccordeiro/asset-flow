@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipment', function (Blueprint $table) {
+        Schema::create('gadget_models', function (Blueprint $table) {
             $table->id();
-            $table->string('model');
-            $table->string('brand');
-            $table->string('patrimony')->unique();
-            $table->date('purchase_date');
-            $table->boolean('is_available')->default(true);
+            $table->string('type');  // Ex: Notebook, Desktop, Monitor
+            $table->string('brand'); // Ex: Dell, HP, Lenovo
+            $table->string('model'); // Ex: Latitude 5420, ProBook 440
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipment');
+        Schema::dropIfExists('gadget_models');
     }
 };
