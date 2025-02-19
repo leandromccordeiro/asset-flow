@@ -193,6 +193,10 @@
                 <i class="fas fa-building"></i>
                 <span>Centros de Custo</span>
             </a>
+            <a href="{{ route('gadget-models.index') }}" class="nav-link">
+                <i class="fas fa-laptop-code"></i>
+                <span>Modelos</span>
+            </a>
             <a href="{{ route('equipment.index') }}" class="nav-link">
                 <i class="fas fa-laptop"></i>
                 <span>Equipamentos</span>

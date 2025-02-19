@@ -20,9 +20,9 @@
                 <i class="fas fa-laptop"></i>
             </div>
             <div class="card-content">
-                <h3>Equipamentos</h3>
+                <h3 class="">Equipamentos</h3>
                 <p class="number">{{ $totalEquipment }}</p>
-                <p class="sub-info">{{ $availableEquipment }} disponíveis</p>
+                <p class="sub-info ">{{ $availableEquipment }} disponíveis</p>
             </div>
         </div>
 

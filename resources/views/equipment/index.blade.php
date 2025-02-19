@@ -8,13 +8,19 @@
     <form action="{{ route('equipment.store') }}" method="POST" class="mt-4">
         @csrf
         <div class="form-group">
-            <label for="model">Modelo</label>
-            <input type="text" name="model" id="model" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="brand">Marca</label>
-            <input type="text" name="brand" id="brand" class="form-control" required>
+            <label for="gadget_model_id">Modelo</label>
+            <select name="gadget_model_id" id="gadget_model_id" class="form-control" required>
+                <option value="">Selecione o modelo...</option>
+                @foreach($gadgetModels->groupBy('type') as $type => $models)
+                    <optgroup label="{{ $type }}">
+                        @foreach($models as $model)
+                            <option value="{{ $model->id }}">
+                                {{ $model->brand }} - {{ $model->model }}
+                            </option>
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group">
@@ -27,14 +33,6 @@
             <input type="date" name="purchase_date" id="purchase_date" class="form-control" required>
         </div>
 
-        <div class="form-group">
-            <label for="is_available">Disponível</label>
-            <select name="is_available" id="is_available" class="form-control" required>
-                <option value="1">Sim</option>
-                <option value="0">Não</option>
-            </select>
-        </div>
-
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 
@@ -44,8 +42,9 @@
             <thead>
                 <tr>
                     <th>Patrimônio</th>
-                    <th>Modelo</th>
+                    <th>Tipo</th>
                     <th>Marca</th>
+                    <th>Modelo</th>
                     <th>Data de Compra</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -55,9 +54,10 @@
                 @foreach($equipment as $item)
                     <tr>
                         <td>{{ $item->patrimony }}</td>
-                        <td>{{ $item->model }}</td>
-                        <td>{{ $item->brand }}</td>
-                        <td>{{ $item->purchase_date->format('d/m/y') }}</td>
+                        <td>{{ $item->gadgetModel->type }}</td>
+                        <td>{{ $item->gadgetModel->brand }}</td>
+                        <td>{{ $item->gadgetModel->model }}</td>
+                        <td>{{ $item->purchase_date->format('d/m/Y') }}</td>
                         <td>
                             <span class="badge {{ $item->is_available ? 'bg-success' : 'bg-danger' }}">
                                 {{ $item->is_available ? 'Disponível' : 'Em uso' }}

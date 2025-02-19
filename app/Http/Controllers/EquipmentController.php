@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipment;
+use App\Models\GadgetModel;
 use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
     public function index()
     {
-        $equipment = Equipment::orderBy('patrimony')->get();
-        return view('equipment.index', compact('equipment'));
+        $equipment = Equipment::with('gadgetModel')->orderBy('patrimony')->get();
+        $gadgetModels = GadgetModel::all();
+        return view('equipment.index', compact('equipment', 'gadgetModels'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'model' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
+            'gadget_model_id' => 'required|exists:gadget_models,id',
             'patrimony' => 'required|string|unique:equipment',
-            'purchase_date' => 'required|date',
-            'is_available' => 'required|boolean'
+            'purchase_date' => 'required|date'
         ]);
 
         Equipment::create($validated);
