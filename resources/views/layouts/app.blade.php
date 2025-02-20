@@ -248,6 +248,27 @@
                     </a>
                 </div>
             </div>
+
+            {{-- Menu Equipamentos com submenu --}}
+            <div class="nav-item">
+                <div class="nav-link menu-toggle" onclick="toggleSubmenu('equipment-menu')">
+                    <div class="menu-content">
+                        <i class="fas fa-users"></i>
+                        <span>Equipamentos</span>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="submenu" id="equipment-menu">
+                    <a href="{{ route('equipment.index') }}" class="nav-link submenu-link">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Cadastrar</span>
+                    </a>
+                    <a href="{{ route('equipment.report') }}" class="nav-link submenu-link">
+                        <i class="fas fa-list"></i>
+                        <span>Listar</span>
+                    </a>
+                </div>
+            </div>
         
             <a href="{{ route('cost-centers.index') }}" class="nav-link">
                 <i class="fas fa-building"></i>

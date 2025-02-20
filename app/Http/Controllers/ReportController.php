@@ -29,6 +29,14 @@ class ReportController extends Controller
         return view('reports.equipment', compact('equipment'));
     }
 
+    public function showEquipmentReport()
+    {
+        $equipment = Equipment::all();
+
+        return view('equipment.report', compact('equipment'));
+    }
+
+
     public function employeeReport(Request $request)
     {
         $query = Employee::query();

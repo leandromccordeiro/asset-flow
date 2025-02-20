@@ -13,16 +13,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 Route::prefix('employees')->group(function () {
     Route::get('report', [ReportController::class, 'showEmployeeReport'])->name('employees.report');
 });
-Route::resource('employees', EmployeeController::class);
+
+Route::prefix('equipment')->group(function () {
+    Route::get('report', [ReportController::class, 'showEquipmentReport'])->name('equipment.report');
+});
+
+Route::resource('/employees', EmployeeController::class);
+Route::resource('/equipment', EquipmentController::class);
 Route::resource('cost-centers', CostCenterController::class);
-Route::resource('equipment', EquipmentController::class);
 Route::resource('assignments', AssignmentController::class);
+Route::resource('gadget-models', GadgetModelController::class);
+
 Route::patch('assignments/{assignment}/return', [AssignmentController::class, 'return'])
     ->name('assignments.return');
-Route::resource('gadget-models', GadgetModelController::class);
 
 Route::prefix('reports')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('reports.index');
