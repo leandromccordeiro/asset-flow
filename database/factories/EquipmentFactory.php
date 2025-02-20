@@ -18,7 +18,7 @@ class EquipmentFactory extends Factory
             'gadget_model_id' => GadgetModel::factory(),
             'patrimony' => $this->faker->unique()->numerify('PAT#####'),
             'purchase_date' => $this->faker->dateTimeBetween('-2 years', 'now'),
-            'is_available' => $this->faker->boolean(70) // 70% chance of being available
+            'is_available' => true
         ];
     }
 }
