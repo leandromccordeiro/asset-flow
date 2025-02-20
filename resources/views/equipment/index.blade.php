@@ -23,7 +23,7 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-4"> {{-- exemplo para reduzir tamanho do input text --}}
             <label for="patrimony">Patrimônio</label>
             <input type="text" name="patrimony" id="patrimony" class="form-control" required>
         </div>

@@ -42,6 +42,13 @@ class ReportController extends Controller
         return view('reports.employees', compact('employees'));
     }
 
+    public function showEmployeeReport()
+    {
+        $employees = Employee::all();
+
+        return view('employees.report', compact('employees'));
+    }
+
     public function assignmentReport(Request $request)
     {
         $query = Assignment::with(['employee', 'equipment']);

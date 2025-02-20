@@ -164,6 +164,48 @@
                 margin-left: 0;
             }
         }
+
+        /* Estilos para submenu */
+.nav-item {
+    position: relative;
+}
+
+.menu-toggle {
+    display: flex !important;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.menu-content {
+    display: flex;
+    align-items: center;
+}
+
+.menu-content i {
+    width: 24px;
+    margin-right: 10px;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle.active .arrow {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.submenu.active {
+    display: block;
+}
+
+.submenu-link {
+    padding-left: 40px !important;
+}
     </style>
 </head>
 <body>
@@ -185,10 +227,28 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="{{ route('employees.index') }}" class="nav-link">
-                <i class="fas fa-users"></i>
-                <span>Funcionários</span>
-            </a>
+        
+            {{-- Menu Funcionários com submenu --}}
+            <div class="nav-item">
+                <div class="nav-link menu-toggle" onclick="toggleSubmenu('employee-menu')">
+                    <div class="menu-content">
+                        <i class="fas fa-users"></i>
+                        <span>Funcionários</span>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="submenu" id="employee-menu">
+                    <a href="{{ route('employees.index') }}" class="nav-link submenu-link">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Cadastrar</span>
+                    </a>
+                    <a href="{{ route('employees.report') }}" class="nav-link submenu-link">
+                        <i class="fas fa-list"></i>
+                        <span>Listar</span>
+                    </a>
+                </div>
+            </div>
+        
             <a href="{{ route('cost-centers.index') }}" class="nav-link">
                 <i class="fas fa-building"></i>
                 <span>Centros de Custo</span>
@@ -205,7 +265,6 @@
                 <i class="fas fa-exchange-alt"></i>
                 <span>Atribuições</span>
             </a>
-
             <a href="{{ route('reports.index') }}" class="nav-link">
                 <i class="fas fa-chart-bar"></i>
                 <span>Relatórios</span>
@@ -239,10 +298,27 @@
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
-            
+
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
             header.classList.toggle('sidebar-open');
+        }
+
+        function toggleSubmenu(menuId) {
+            const submenu = document.getElementById(menuId);
+            const menuToggle = submenu.previousElementSibling;
+            
+            // Fecha todos os outros submenus
+            document.querySelectorAll('.submenu.active').forEach(item => {
+                if (item.id !== menuId) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.classList.remove('active');
+                }
+            });
+
+            // Toggle do submenu atual
+            submenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
         }
     </script>
 </body>

@@ -19,7 +19,7 @@ class EquipmentController extends Controller
     {
         $validated = $request->validate([
             'gadget_model_id' => 'required|exists:gadget_models,id',
-            'patrimony' => 'required|string|unique:equipment',
+            'patrimony' => 'required|string|unique:equipments',
             'purchase_date' => 'required|date'
         ]);
 

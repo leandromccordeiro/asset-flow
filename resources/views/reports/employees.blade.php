@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2>Relatório de Funcionários</h2>
-        <a href="{{ route('reports.index') }}" class="btn btn-secondary">Voltar</a>
+        <a href="{{ route('employees.report') }}" class="btn btn-secondary">Voltar</a>
     </div>
     <div class="card-body">
         <table class="table">
