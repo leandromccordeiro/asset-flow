@@ -12,8 +12,6 @@ class EquipmentFactory extends Factory
 
     public function definition()
     {
-
-
         return [
             'gadget_model_id' => GadgetModel::factory(),
             'patrimony' => $this->faker->unique()->numerify('PAT#####'),

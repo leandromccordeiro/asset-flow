@@ -288,6 +288,10 @@
                         <i class="fas fa-list"></i>
                         <span>Listar</span>
                     </a>
+                    <a href="{{ route('assignments.active') }}" class="nav-link submenu-link">
+                        <i class="fas fa-link""></i>
+                        <span>Atribuições Ativas</span>
+                    </a>
                 </div>
             </div>
         

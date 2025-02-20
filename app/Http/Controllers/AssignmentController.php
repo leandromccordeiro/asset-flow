@@ -75,4 +75,14 @@ class AssignmentController extends Controller
         return redirect()->route('assignments.index')
             ->with('success', 'Devolução registrada com sucesso!');
     }
+
+    public function active()
+    {
+        $activeAssignments = Assignment::with(['employee.costCenter', 'equipment.gadgetModel'])
+                                ->whereNull('return_date')
+                                ->get();
+    
+        return view('assignments.active', compact('activeAssignments'));
+        
+    }
 }
