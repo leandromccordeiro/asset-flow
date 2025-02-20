@@ -40,7 +40,10 @@
     <div class="dashboard-content">
         {{-- Atribuições Recentes --}}
         <div class="card recent-assignments">
-            <h2>Atribuições Recentes</h2>
+            <div class="card-header">
+                <h3>Atribuições Recentes</h3>
+            </div>
+            <br>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -62,6 +65,50 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="ard cost-center-distribution">
+            <div class="">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Equipamentos Disponíveis por Tipo</h3>
+                    </div>
+                    <br>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th class='text-center'>Quantidade Disponível</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($availableByType as $type)
+                                        <tr>
+                                            <td>{{ $type->type }}</td>
+                                            <td class='text-center'>
+                                                <span class="badge bg-success">{{ $type->total }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @if($availableByType->isEmpty())
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                Nenhum equipamento disponível
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th class='text-center'>{{ $availableEquipment }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                </div>
             </div>
         </div>
 

@@ -23,6 +23,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $availableByType = Equipment::where('is_available', true)
+        ->join('gadget_models', 'equipments.gadget_model_id', '=', 'gadget_models.id')
+        ->select('gadget_models.type', DB::raw('count(*) as total'))
+        ->groupBy('gadget_models.type')
+        ->get();
+
         $equipmentByCostCenter = DB::table('assignments')
             ->join('employees', 'assignments.employee_id', '=', 'employees.id')
             ->join('cost_centers', 'employees.cost_center_id', '=', 'cost_centers.id')
@@ -37,7 +43,8 @@ class DashboardController extends Controller
             'availableEquipment',
             'activeAssignments',
             'recentAssignments',
-            'equipmentByCostCenter'
+            'equipmentByCostCenter',
+            'availableByType'
         ));
     }
 
