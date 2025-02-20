@@ -253,7 +253,7 @@
             <div class="nav-item">
                 <div class="nav-link menu-toggle" onclick="toggleSubmenu('equipment-menu')">
                     <div class="menu-content">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-laptop"></i>
                         <span>Equipamentos</span>
                     </div>
                     <i class="fas fa-chevron-down arrow"></i>
@@ -263,7 +263,28 @@
                         <i class="fas fa-user-plus"></i>
                         <span>Cadastrar</span>
                     </a>
-                    <a href="{{ route('equipment.report') }}" class="nav-link submenu-link">
+                    <a href="{{ route('equipments.report') }}" class="nav-link submenu-link">
+                        <i class="fas fa-list"></i>
+                        <span>Listar</span>
+                    </a>
+                </div>
+            </div>
+
+            {{-- Menu Assignments com submenu --}}
+            <div class="nav-item">
+                <div class="nav-link menu-toggle" onclick="toggleSubmenu('assignments-menu')">
+                    <div class="menu-content">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Atribuições</span>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="submenu" id="assignments-menu">
+                    <a href="{{ route('assignments.index') }}" class="nav-link submenu-link">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Cadastrar</span>
+                    </a>
+                    <a href="{{ route('assignments.report') }}" class="nav-link submenu-link">
                         <i class="fas fa-list"></i>
                         <span>Listar</span>
                     </a>
@@ -277,14 +298,6 @@
             <a href="{{ route('gadget-models.index') }}" class="nav-link">
                 <i class="fas fa-laptop-code"></i>
                 <span>Modelos</span>
-            </a>
-            <a href="{{ route('equipment.index') }}" class="nav-link">
-                <i class="fas fa-laptop"></i>
-                <span>Equipamentos</span>
-            </a>
-            <a href="{{ route('assignments.index') }}" class="nav-link">
-                <i class="fas fa-exchange-alt"></i>
-                <span>Atribuições</span>
             </a>
             <a href="{{ route('reports.index') }}" class="nav-link">
                 <i class="fas fa-chart-bar"></i>

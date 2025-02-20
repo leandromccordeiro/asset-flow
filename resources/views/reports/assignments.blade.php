@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2>Relatório de Atribuições</h2>
-        <a href="{{ route('reports.index') }}" class="btn btn-secondary">Voltar</a>
+        <a href="{{ route('assignments.report') }}" class="btn btn-secondary">Voltar</a>
     </div>
     <div class="card-body">
         <table class="table">
@@ -30,11 +30,14 @@
                         {{ $assignment->employee->costCenter->description }}
                     </td>
                     <td>
-                        {{ $assignment->equipment->model }}
-                        <br>
-                        <small class="text-muted">
-                            Patrimônio: {{ $assignment->equipment->patrimony }}
-                        </small>
+                        <div>
+                            <strong>Tipo: {{ $assignment->equipment->gadgetModel->type }}</strong><br>
+                            {{ $assignment->equipment->gadgetModel->brand }} 
+                            {{ $assignment->equipment->gadgetModel->model }}<br>
+                            <small class="text-muted">
+                                Patrimônio: {{ $assignment->equipment->patrimony }}
+                            </small>
+                        </div>
                     </td>
                     <td>{{ $assignment->assignment_date->format('d/m/Y') }}</td>
                     <td>

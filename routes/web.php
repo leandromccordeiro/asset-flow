@@ -18,12 +18,16 @@ Route::prefix('employees')->group(function () {
     Route::get('report', [ReportController::class, 'showEmployeeReport'])->name('employees.report');
 });
 
-Route::prefix('equipment')->group(function () {
-    Route::get('report', [ReportController::class, 'showEquipmentReport'])->name('equipment.report');
+Route::prefix('equipments')->group(function () {
+    Route::get('report', [ReportController::class, 'showEquipmentReport'])->name('equipments.report');
 });
 
-Route::resource('/employees', EmployeeController::class);
-Route::resource('/equipment', EquipmentController::class);
+Route::prefix('assignments')->group(function () {
+    Route::get('report', [ReportController::class, 'showAssignmentReport'])->name('assignments.report');
+});
+
+Route::resource('employees', EmployeeController::class);
+Route::resource('equipment', EquipmentController::class);
 Route::resource('cost-centers', CostCenterController::class);
 Route::resource('assignments', AssignmentController::class);
 Route::resource('gadget-models', GadgetModelController::class);

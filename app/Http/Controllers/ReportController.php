@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Employee;
 use App\Models\Equipment;
+use App\Models\GadgetModel;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -65,6 +66,12 @@ class ReportController extends Controller
             $query->where('employee_id', $request->employee_id);
         }
 
+        if ($request->filled('equipment_type')) {
+            $query->whereHas('equipment.gadgetModel', function($q) use ($request) {
+                $q->where('type', $request->equipment_type);
+            });
+        }
+
         if ($request->filled('equipment_id')) {
             $query->where('equipment_id', $request->equipment_id);
         }
@@ -88,5 +95,18 @@ class ReportController extends Controller
         $assignments = $query->orderBy('assignment_date', 'desc')->get();
 
         return view('reports.assignments', compact('assignments'));
+    }
+
+    public function showAssignmentReport()
+    {
+        $assignments = Assignment::all();
+        $employees = Employee::all();
+        $equipment = Equipment::all();
+        $equipmentTypes = GadgetModel::select('type')
+        ->distinct()
+        ->pluck('type');
+        
+
+        return view('assignments.report', compact('assignments', 'employees', 'equipment', 'equipmentTypes'));
     }
 }
