@@ -36,47 +36,6 @@
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 
-    <div class="mt-4">
-        <h3>Equipamentos Cadastrados</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Patrimônio</th>
-                    <th>Tipo</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Data de Compra</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($equipment as $item)
-                    <tr>
-                        <td>{{ $item->patrimony }}</td>
-                        <td>{{ $item->gadgetModel->type }}</td>
-                        <td>{{ $item->gadgetModel->brand }}</td>
-                        <td>{{ $item->gadgetModel->model }}</td>
-                        <td>{{ $item->purchase_date->format('d/m/Y') }}</td>
-                        <td>
-                            <span class="badge {{ $item->is_available ? 'bg-success' : 'bg-danger' }}">
-                                {{ $item->is_available ? 'Disponível' : 'Em uso' }}
-                            </span>
-                        </td>
-                        <td>
-                            <form action="{{ route('equipment.destroy', $item) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Tem certeza que deseja excluir?')">
-                                    Excluir
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+
 </div>
 @endsection

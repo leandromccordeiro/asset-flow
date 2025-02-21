@@ -19,24 +19,25 @@ class ReportController extends Controller
 
     public function equipmentReport(Request $request)
     {
-        $query = Equipment::query();
+        $query = Equipment::with(['gadgetModel', 'assignments.employee']);
 
         if ($request->filled('is_available')) {
             $query->where('is_available', $request->is_available);
         }
-
-        $equipment = $query->with(['assignments.employee'])->get();
-
+    
+        // Define quantos itens você quer por página (ex: 10)
+        $equipment = $query->paginate(10);
+    
         return view('reports.equipment', compact('equipment'));
     }
 
     public function showEquipmentReport()
     {
-        $equipment = Equipment::all();
+        // $equipment = Equipment::all();
+        // $equipment = $equipment->paginate(10);
 
-        return view('equipment.report', compact('equipment'));
+        return view('equipment.report');
     }
-
 
     public function employeeReport(Request $request)
     {
@@ -46,7 +47,7 @@ class ReportController extends Controller
             $query->where('id', $request->employee_id);
         }
 
-        $employees = $query->with(['assignments.equipment', 'costCenter'])->get();
+        $employees = $query->with(['assignments.equipment', 'costCenter'])->paginate(10);
 
         return view('reports.employees', compact('employees'));
     }

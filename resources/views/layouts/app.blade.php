@@ -260,7 +260,7 @@
                 </div>
                 <div class="submenu" id="equipment-menu">
                     <a href="{{ route('equipment.index') }}" class="nav-link submenu-link">
-                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-laptop"></i>
                         <span>Cadastrar</span>
                     </a>
                     <a href="{{ route('equipments.report') }}" class="nav-link submenu-link">
@@ -281,8 +281,8 @@
                 </div>
                 <div class="submenu" id="assignments-menu">
                     <a href="{{ route('assignments.index') }}" class="nav-link submenu-link">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Cadastrar</span>
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Registrar</span>
                     </a>
                     <a href="{{ route('assignments.report') }}" class="nav-link submenu-link">
                         <i class="fas fa-list"></i>
@@ -290,7 +290,11 @@
                     </a>
                     <a href="{{ route('assignments.active') }}" class="nav-link submenu-link">
                         <i class="fas fa-link""></i>
-                        <span>Atribuições Ativas</span>
+                        <span>Ativas</span>
+                    </a>
+                    <a href="{{ route('assignments.history') }}" class="nav-link submenu-link">
+                        <i class="fas fa-clock"></i>
+                        <span>Histórico</span>
                     </a>
                 </div>
             </div>

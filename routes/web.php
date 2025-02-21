@@ -25,6 +25,7 @@ Route::prefix('equipments')->group(function () {
 Route::prefix('assignments')->group(function () {
     Route::get('report', [ReportController::class, 'showAssignmentReport'])->name('assignments.report');
     Route::get('active', [AssignmentController::class, 'active'])->name('assignments.active');
+    Route::get('historory', [AssignmentController::class, 'history'])->name('assignments.history');
 });
 
 Route::resource('employees', EmployeeController::class);

@@ -83,6 +83,15 @@ class AssignmentController extends Controller
                                 ->get();
     
         return view('assignments.active', compact('activeAssignments'));
-        
+
+    }
+
+    public function history() {
+        $assignmentHistory = Assignment::with(['employee', 'equipment.gadgetModel'])
+                                ->whereNotNull('return_date')
+                                ->latest()
+                                ->paginate(10);
+    
+        return view('assignments.history', compact('assignmentHistory'));
     }
 }
