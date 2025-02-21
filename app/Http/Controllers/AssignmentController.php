@@ -80,7 +80,7 @@ class AssignmentController extends Controller
     {
         $activeAssignments = Assignment::with(['employee.costCenter', 'equipment.gadgetModel'])
                                 ->whereNull('return_date')
-                                ->get();
+                                ->paginate(10);
     
         return view('assignments.active', compact('activeAssignments'));
 

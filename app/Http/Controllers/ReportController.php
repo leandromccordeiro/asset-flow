@@ -93,7 +93,7 @@ class ReportController extends Controller
             $query->where('assignment_date', '<=', $request->date_end);
         }
 
-        $assignments = $query->orderBy('assignment_date', 'desc')->get();
+        $assignments = $query->orderBy('assignment_date', 'desc')->paginate(10);
 
         return view('reports.assignments', compact('assignments'));
     }
