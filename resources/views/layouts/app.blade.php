@@ -307,10 +307,10 @@
                 <i class="fas fa-laptop-code"></i>
                 <span>Modelos</span>
             </a>
-            <a href="{{ route('reports.index') }}" class="nav-link">
+            {{-- <a href="{{ route('reports.index') }}" class="nav-link">
                 <i class="fas fa-chart-bar"></i>
                 <span>Relatórios</span>
-            </a>
+            </a> --}}
         </nav>
     </div>
 

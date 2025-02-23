@@ -3,9 +3,10 @@
 
 @section('content')
 <div class="card">
-    <h2>Cadastro de Funcionários</h2>
-    
-    <form action="{{ route('employees.store') }}" method="POST" class="mt-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2>Cadastro de Funcionários</h2>
+    </div>
+    <form action="{{ route('employees.store') }}" method="POST" class="">
         @csrf
         <div class="form-group">
             <label for="name">Nome</label>
