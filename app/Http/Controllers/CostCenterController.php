@@ -26,6 +26,19 @@ class CostCenterController extends Controller
             ->with('success', 'Centro de Custo cadastrado com sucesso!');
     }
 
+    public function update(Request $request, CostCenter $costCenter)
+    {
+        $validated = $request->validate([
+            'code' => 'required|string|unique:cost_centers,code,' . $costCenter->id,
+            'description' => 'required|string|max:255'
+        ]);
+
+        $costCenter->update($validated);
+
+        return redirect()->route('cost-centers.index')
+            ->with('success', 'Centro de Custo atualizado com sucesso!');
+    }
+
     public function destroy(CostCenter $costCenter)
     {
         if ($costCenter->employees()->exists()) {

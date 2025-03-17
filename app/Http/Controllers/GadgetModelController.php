@@ -27,6 +27,20 @@ class GadgetModelController extends Controller
             ->with('success', 'Modelo cadastrado com sucesso!');
     }
 
+    public function update(Request $request, GadgetModel $gadgetModel)
+    {
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255'
+        ]);
+
+        $gadgetModel->update($validated);
+
+        return redirect()->route('gadget-models.index')
+            ->with('success', 'Modelo atualizado com sucesso!');
+    }
+
     public function destroy(GadgetModel $gadgetModel)
     {
         if ($gadgetModel->equipment()->exists()) {
