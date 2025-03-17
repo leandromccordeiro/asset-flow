@@ -10,9 +10,9 @@ class EquipmentController extends Controller
 {
     public function index()
     {
-        $equipment = Equipment::with('gadgetModel')->orderBy('patrimony')->get();
+        $equipments = Equipment::with('gadgetModel')->orderBy('patrimony')->get();
         $gadgetModels = GadgetModel::all();
-        return view('equipment.index', compact('equipment', 'gadgetModels'));
+        return view('equipment.index', compact('equipments', 'gadgetModels'));
     }
 
     public function store(Request $request)

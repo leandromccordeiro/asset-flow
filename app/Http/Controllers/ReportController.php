@@ -6,6 +6,7 @@ use App\Models\Assignment;
 use App\Models\Employee;
 use App\Models\Equipment;
 use App\Models\GadgetModel;
+use App\Models\CostCenter;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -55,8 +56,9 @@ class ReportController extends Controller
     public function showEmployeeReport()
     {
         $employees = Employee::all();
+        $costCenters = CostCenter::all();
 
-        return view('employees.report', compact('employees'));
+        return view('employees.report', compact('employees', 'costCenters'));
     }
 
     public function assignmentReport(Request $request)

@@ -37,5 +37,20 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')
             ->with('success', 'Funcionário removido com sucesso!');
     }
-}
 
+    public function update(Request $request, Employee $employee)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees,email,' . $employee->id,
+            'cpf' => 'required|string|unique:employees,cpf,' . $employee->id,
+            'birth_date' => 'required|date',
+            'cost_center_id' => 'required|exists:cost_centers,id'
+        ]);
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Funcionário atualizado com sucesso!');
+    }
+}

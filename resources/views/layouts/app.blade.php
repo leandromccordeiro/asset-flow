@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle Patrimonial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.x.x/dist/css/bootstrap.min.css">
     @vite('resources/css/app.css')
     <style>
         :root {
@@ -166,46 +167,46 @@
         }
 
         /* Estilos para submenu */
-.nav-item {
-    position: relative;
-}
+        .nav-item {
+            position: relative;
+        }
 
-.menu-toggle {
-    display: flex !important;
-    justify-content: space-between;
-    cursor: pointer;
-}
+        .menu-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            cursor: pointer;
+        }
 
-.menu-content {
-    display: flex;
-    align-items: center;
-}
+        .menu-content {
+            display: flex;
+            align-items: center;
+        }
 
-.menu-content i {
-    width: 24px;
-    margin-right: 10px;
-}
+        .menu-content i {
+            width: 24px;
+            margin-right: 10px;
+        }
 
-.arrow {
-    transition: transform 0.3s ease;
-}
+        .arrow {
+            transition: transform 0.3s ease;
+        }
 
-.menu-toggle.active .arrow {
-    transform: rotate(180deg);
-}
+        .menu-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
 
-.submenu {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.1);
-}
+        .submenu {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
 
-.submenu.active {
-    display: block;
-}
+        .submenu.active {
+            display: block;
+        }
 
-.submenu-link {
-    padding-left: 40px !important;
-}
+        .submenu-link {
+            padding-left: 40px !important;
+        }
     </style>
 </head>
 <body>
@@ -369,5 +370,7 @@
             menuToggle.classList.toggle('active');
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 </html>

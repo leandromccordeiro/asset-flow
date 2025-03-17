@@ -132,164 +132,165 @@
 </div>
 
 <style>
-.dashboard {
-    padding: 20px;
-}
-
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.info-card {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.card-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    font-size: 24px;
-}
-
-.employees {
-    background: #e3f2fd;
-    color: #1976d2;
-}
-
-.equipment {
-    background: #e8f5e9;
-    color: #388e3c;
-}
-
-.assignments {
-    background: #fff3e0;
-    color: #f57c00;
-}
-
-.card-content h3 {
-    margin: 0;
-    font-size: 16px;
-    color: #666;
-}
-
-.number {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 5px 0;
-    color: #333;
-}
-
-.sub-info {
-    font-size: 14px;
-    color: #666;
-}
-
-.dashboard-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.card h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 18px;
-}
-
-.table-responsive {
-    overflow-x: auto;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table th,
-.table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-.table th {
-    font-weight: 600;
-    color: #666;
-}
-
-.chart-container {
-    height: 300px;
-    padding: 20px 0;
-}
-
-.chart-wrapper {
-    display: flex;
-    align-items: flex-end;
-    height: 100%;
-    gap: 15px;
-}
-
-.chart-bar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.bar {
-    width: 40px;
-    background: #1976d2;
-    border-radius: 4px 4px 0 0;
-    position: relative;
-    transition: height 0.3s;
-    min-height: 30px;
-}
-
-.bar-value {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.bar-label {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #666;
-    text-align: center;
-    word-wrap: break-word;
-    max-width: 80px;
-}
-
-@media (max-width: 768px) {
-    .dashboard-content {
-        grid-template-columns: 1fr;
+    .dashboard {
+        padding: 20px;
     }
-    
+
     .grid-cards {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
     }
-}
+
+    .info-card {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 24px;
+    }
+
+    .employees {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .equipment {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .assignments {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+
+    .card-content h3 {
+        margin: 0;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .number {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 5px 0;
+        color: #333;
+    }
+
+    .sub-info {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .dashboard-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .table th {
+        font-weight: 600;
+        color: #666;
+    }
+
+    .chart-container {
+        height: 300px;
+        padding: 20px 0;
+    }
+
+    .chart-wrapper {
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        gap: 15px;
+    }
+
+    .chart-bar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bar {
+        width: 40px;
+        background: #1976d2;
+        border-radius: 4px 4px 0 0;
+        position: relative;
+        transition: height 0.3s;
+        min-height: 30px;
+    }
+
+    .bar-value {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .bar-label {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        word-wrap: break-word;
+        max-width: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .grid-cards {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
+
 @endsection

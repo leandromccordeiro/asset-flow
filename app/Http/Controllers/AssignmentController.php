@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssignmentRequest;
 use App\Models\Assignment;
 use App\Models\Employee;
 use App\Models\Equipment;
@@ -38,13 +39,9 @@ class AssignmentController extends Controller
         ));
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'equipment_id' => 'required|exists:equipments,id',
-            'assignment_date' => 'required|date'
-        ]);
+    public function store(AssignmentRequest $request)
+    {   
+        $validated = $request->validated();
 
         DB::transaction(function () use ($validated) {
             Assignment::create($validated);
