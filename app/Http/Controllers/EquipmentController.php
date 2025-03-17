@@ -28,6 +28,19 @@ class EquipmentController extends Controller
         return redirect()->route('equipment.index')
             ->with('success', 'Equipamento cadastrado com sucesso!');
     }
+    public function update(Request $request, Equipment $equipment)
+    {
+        $validated = $request->validate([
+            'gadget_model_id' => 'required|exists:gadget_models,id',
+            'patrimony' => 'required|string|unique:equipments,patrimony,' . $equipment->id,
+            'purchase_date' => 'required|date'
+        ]);
+
+        $equipment->update($validated);
+
+        return redirect()->route('equipment.index')
+            ->with('success', 'Equipamento atualizado com sucesso!');
+    }
 
     public function destroy(Equipment $equipment)
     {

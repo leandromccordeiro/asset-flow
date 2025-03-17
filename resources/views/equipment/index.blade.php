@@ -90,15 +90,20 @@
                                 <td>{{ $equipment->patrimony }}</td>
                                 <td>{{ date('d/m/Y', strtotime($equipment->purchase_date)) }}</td>
                                 <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="{{ route('equipment.edit', $equipment) }}" class="btn btn-outline-secondary">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <form action="{{ route('equipment.destroy', $equipment) }}" method="POST" class="d-inline">
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary edit-equipment" 
+                                                data-id="{{ $equipment->id }}"
+                                                data-gadget-model-id="{{ $equipment->gadget_model_id }}"
+                                                data-patrimony="{{ $equipment->patrimony }}"
+                                                data-purchase-date="{{ $equipment->purchase_date->format('Y-m-d') }}">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </button>
+                                        <form action="{{ route('equipment.destroy', $equipment) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Confirma a exclusão deste equipamento?')">
-                                                <i class="bi bi-trash"></i>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                    onclick="return confirm('Confirma a exclusão deste equipamento?')">
+                                                <i class="bi bi-trash"></i> Excluir
                                             </button>
                                         </form>
                                     </div>
@@ -112,10 +117,56 @@
     </div>
 </div>
 
+<!-- Modal de Edição de Equipamento -->
+<div class="modal fade" id="editEquipmentModal" tabindex="-1" aria-labelledby="editEquipmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEquipmentModalLabel">Editar Equipamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editEquipmentForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="edit_gadget_model_id" class="form-label">Modelo</label>
+                        <select name="gadget_model_id" id="edit_gadget_model_id" class="form-select" required>
+                            <option value="">Selecione o modelo...</option>
+                            @foreach($gadgetModels->groupBy('type') as $type => $models)
+                                <optgroup label="{{ $type }}">
+                                    @foreach($models as $model)
+                                        <option value="{{ $model->id }}">
+                                            {{ $model->brand }} - {{ $model->model }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_patrimony" class="form-label">Patrimônio</label>
+                        <input type="text" class="form-control" id="edit_patrimony" name="patrimony" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_purchase_date" class="form-label">Data de Compra</label>
+                        <input type="date" class="form-control" id="edit_purchase_date" name="purchase_date" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="editEquipmentForm" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('scripts')
     <script>
         // Garantir que o script seja executado após o carregamento completo da página
         window.addEventListener('load', function() {
+            // Configuração da busca na tabela
             const searchInput = document.getElementById('searchEquipment');
             
             if (searchInput) {
@@ -156,7 +207,33 @@
             } else {
                 console.error('Elemento de busca não encontrado. ID: searchEquipment');
             }
+
+            // Configurar modal de edição
+            const editButtons = document.querySelectorAll('.edit-equipment');
+            const editForm = document.getElementById('editEquipmentForm');
+            const modal = new bootstrap.Modal(document.getElementById('editEquipmentModal'));
+            
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const equipmentId = this.getAttribute('data-id');
+                    const gadgetModelId = this.getAttribute('data-gadget-model-id');
+                    const patrimony = this.getAttribute('data-patrimony');
+                    const purchaseDate = this.getAttribute('data-purchase-date');
+                    
+                    // Preencher o formulário
+                    document.getElementById('edit_gadget_model_id').value = gadgetModelId;
+                    document.getElementById('edit_patrimony').value = patrimony;
+                    document.getElementById('edit_purchase_date').value = purchaseDate;
+                    
+                    // Definir a URL do formulário
+                    editForm.action = `/equipment/${equipmentId}`;
+                    
+                    // Abrir o modal
+                    modal.show();
+                });
+            });
         });
     </script>
 @endpush
+
 @endsection
